@@ -1,14 +1,14 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
 import { AppProvider } from "./context/AppContext";
 
 const App: React.FC = () => {
   return (
     <AppProvider>
-      <BrowserRouter basename="/DariyApp">
+      <HashRouter>
         <AppRoutes />
-      </BrowserRouter>
+      </HashRouter>
     </AppProvider>
   );
 };

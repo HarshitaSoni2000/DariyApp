@@ -1,8 +1,8 @@
-export const APP_NAME = import.meta.env.VITE_APP_NAME || "My React App";
+export const APP_NAME = import.meta.env.VITE_APP_NAME || "Subhash Dairy";
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const ROUTES = {
-  HOME: "/",
+  HOME: "/dashboard",
   SUPPLIERS: "/suppliers",
   PURCHASES: "/purchases",
   SUPPLIER_BILLS: "/supplier-bills",
