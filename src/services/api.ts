@@ -24,7 +24,12 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      // handle unauthorized (e.g. redirect to login)
+      // token invalid/expired - clear it so the next request doesn't retry with a bad token
+      try {
+        localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+      } catch {
+        // ignore
+      }
     }
     return Promise.reject(error);
   }
@@ -32,8 +37,12 @@ api.interceptors.response.use(
 
 export default api;
 
-// Example resource-based service functions
-export const getUsers = () => api.get("/users");
-export const getUserById = (id: string | number) => api.get(`/users/${id}`);
-export const createUser = (data: Record<string, unknown>) =>
-  api.post("/users", data);
+/** Extracts a readable message from an Axios/API error for display in the UI. */
+export function getErrorMessage(err: unknown): string {
+  const axiosErr = err as AxiosError<{ message?: string }>;
+  return (
+    axiosErr?.response?.data?.message ||
+    axiosErr?.message ||
+    "Something went wrong. Please try again."
+  );
+}
