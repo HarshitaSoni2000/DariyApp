@@ -55,6 +55,11 @@ VITE_API_BASE_URL=https://api.example.com
 VITE_APP_NAME=MyReactApp
 ```
 
+For GitHub Pages deployments, add a repository Actions variable named
+`VITE_API_BASE_URL` under **Settings > Secrets and variables > Actions > Variables**.
+It must be the URL of the backend API, not the GitHub Pages site URL. The Pages
+workflow passes this value to Vite at build time.
+
 ## Notes
 - API base URL and app name are read from `.env` via `import.meta.env`.
 - `services/api.ts` auto-attaches auth token from localStorage on every request.
